@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Accommodation | NoviceSphere</title>
+    <link rel="icon" type="image/png" href="Assets/Company Logo (1).png">
+    <link rel="shortcut icon" type="image/png" href="Assets/Company Logo (1).png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accommodationstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar (same as index.html) -->
+    <header class="header">
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon" style="margin-right:0;">
+                    <img src="Assets/Company Logo (1).png" alt="NoviceSphere logo icon">
+                </div><span class="logo-text" style="margin-left:0;">NOVICESPHERE</span>
+            </a>
+            
+            <!-- Mobile menu toggle button -->
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="center-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <div class="nav-link nav-applications" id="applicationsMenuTrigger" tabindex="0">
+                    Services
+                    <svg style="margin-left:6px;vertical-align:middle;" width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L7 7L13 1" stroke="#1a8f4c" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <a href="accommodation.html" class="nav-link accommodation-link">Accommodation</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="#" class="nav-link">Listing</a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Applications Subheader (hidden by default) -->
+    <div class="applications-subheader" id="applicationsSubheader">
+        <div class="container applications-subheader-inner">
+            <a href="university-applications.html" class="subheader-link">University Applications</a>
+            <a href="bursary-applications.html" class="subheader-link">Bursary Applications</a>
+            <a href="nbt-applications.html" class="subheader-link">NBT Applications</a>
+            <a href="career-guidance.html" class="subheader-link">Career guidance</a>
+        </div>
+    </div>
+
+    <!-- Accommodation Hero Section -->
+    <section class="services-hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1 class="font-poppins">FIND YOUR PERFECT STUDENT ACCOMMODATION</h1>
+            <p class="font-opensans">Browse through hundreds of verified student residences near your campus. Safe, affordable, and convenient living spaces.</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name, location or campus...">
+                    <button id="searchButton">Search</button>
+                </div>
+                <div class="filter-options">
+                    <select id="campusFilter">
+                        <option value="">All Campuses</option>
+                        <option value="University of Johannesburg">University of Johannesburg</option>
+                        <option value="University of Pretoria">University of Pretoria</option>
+                        <option value="University of Cape Town">University of Cape Town</option>
+                        <option value="Wits University">Wits University</option>
+                        <option value="Stellenbosch University">Stellenbosch University</option>
+                    </select>
+                    <select id="priceFilter">
+                        <option value="">Any Price</option>
+                        <option value="0-2000">Under R2000</option>
+                        <option value="2000-4000">R2000 - R4000</option>
+                        <option value="4000-6000">R4000 - R6000</option>
+                        <option value="6000-8000">R6000 - R8000</option>
+                        <option value="8000+">R8000+</option>
+                    </select>
+                    <select id="typeFilter">
+                        <option value="">Any Type</option>
+                        <option value="Residence">University Residence</option>
+                        <option value="Private">Private Residence</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="House">Shared House</option>
+                    </select>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- Accommodation Listing Section -->
+    <section class="accommodation-listing">
+        <div class="container">
+            <div class="listing-header">
+                <h2>Available Accommodations</h2>
+                <div class="sort-options">
+                    <span>Sort by:</span>
+                    <select id="sortBy">
+                        <option value="price-asc">Price (Low to High)</option>
+                        <option value="price-desc">Price (High to Low)</option>
+                        <option value="distance">Distance to Campus</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="accommodation-grid" id="accommodationGrid">
+                <!-- Accommodation cards will be dynamically inserted here by JavaScript -->
+            </div>
+
+            <div class="pagination">
+                <button id="prevPage" disabled>Previous</button>
+                <span id="pageInfo">Page 1 of 5</span>
+                <button id="nextPage">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Modal (hidden by default) -->
+    <div class="modal" id="applicationModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Apply for Accommodation</h2>
+            <form id="applicationForm">
+                <input type="hidden" id="accommodationId">
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentNumber">Student Number</label>
+                    <input type="text" id="studentNumber" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="institution">Institution</label>
+                    <input type="text" id="institution" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="moveInDate">Preferred Move-in Date</label>
+                    <input type="date" id="moveInDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Additional Information</label>
+                    <textarea id="message" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="index.html" class="footer-logo">
+                        <img src="Assets/Company Logo (1).png" alt="NoviceSphere Full Logo">
+                    </a>
+                    <h4>About NoviceSphere</h4>
+                    <p>NoviceSphere Is an educational consultation company that specializes in career guidance, university applications, bursary applications, National Benchmark Tests (NBT) applications, and student accommodation applications.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">University Applications</a></li>
+                        <li><a href="#">International Students</a></li>
+                        <li><a href="#">Bursary applications</a></li>
+                        <li><a href="#">NBT applications</a></li>
+                        <li><a href="accommodation.html">Student accommodations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-socials">
+                    <h4>Socials</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                        <a href="https://www.tiktok.com/@novicesphere_sa?is_from_webapp=1&sender_device=pc" aria-label="TikTok">
+                            <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: grayscale(1) brightness(1.7);">
+                              <g>
+                                <path d="M36.5 16.5C32.91 16.5 30 13.59 30 10V8H25V32C25 34.21 23.21 36 21 36C18.79 36 17 34.21 17 32C17 29.79 18.79 28 21 28C21.34 28 21.67 28.04 22 28.09V23.02C21.67 23.01 21.34 23 21 23C15.48 23 11 27.48 11 33C11 38.52 15.48 43 21 43C26.52 43 31 38.52 31 33V20.36C33.01 21.61 35.36 22.5 38 22.5V17.5C37.5 17.5 37 17.5 36.5 17.5Z" fill="#010101"/>
+                                <path d="M36.5 16.5C32.91 16.5 30 13.59 30 10V8H25V32C25 34.21 23.21 36 21 36C18.79 36 17 34.21 17 32C17 29.79 18.79 28 21 28C21.34 28 21.67 28.04 22 28.09V23.02C21.67 23.01 21.34 23 21 23C15.48 23 11 27.48 11 33C11 38.52 15.48 43 21 43C26.52 43 31 38.52 31 33V20.36C33.01 21.61 35.36 22.5 38 22.5V17.5C37.5 17.5 37 17.5 36.5 17.5Z" fill="#25F4EE"/>
+                                <path d="M38 17.5V22.5C35.36 22.5 33.01 21.61 31 20.36V33C31 38.52 26.52 43 21 43C15.48 43 11 38.52 11 33C11 27.48 15.48 23 21 23C21.34 23 21.67 23.01 22 23.02V28.09C21.67 28.04 21.34 28 21 28C18.79 28 17 29.79 17 32C17 34.21 18.79 36 21 36C23.21 36 25 34.21 25 32V8H30V10C30 13.59 32.91 16.5 36.5 16.5C37 16.5 37.5 16.5 38 16.5V17.5Z" fill="#FE2C55"/>
+                              </g>
+                            </svg>
+                        </a>                    
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 NoviceSphere. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="accommodation.js"></script>
+</body>
+</html>
